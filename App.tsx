@@ -8,6 +8,9 @@ import About from './components/About';
 import Contact from './components/Contact';
 import AIChat from './components/AIChat';
 import Footer from './components/Footer';
+import Sustainability from './components/Sustainability';
+import Testimonials from './components/Testimonials';
+import Careers from './components/Careers';
 
 const App: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -28,7 +31,10 @@ const App: React.FC = () => {
         <Hero />
         <About />
         <Services />
+        <Sustainability />
         <Projects />
+        <Testimonials />
+        <Careers />
         <Contact />
       </main>
 

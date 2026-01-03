@@ -1,6 +1,15 @@
 
 import React, { useState } from 'react';
 
+// Constante pour l'URL externe, facilement modifiable ou injectable via env
+const EXTERNAL_URL = 'https://google.fr';
+
+interface NavLink {
+  name: string;
+  href: string;
+  isExternal?: boolean;
+}
+
 interface NavbarProps {
   isScrolled: boolean;
 }
@@ -8,13 +17,13 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ isScrolled }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const navLinks = [
+  const navLinks: NavLink[] = [
     { name: 'Accueil', href: '#' },
     { name: 'À Propos', href: '#about' },
     { name: 'Services', href: '#services' },
     { name: 'Projets', href: '#projects' },
     { name: 'Contact', href: '#contact' },
-    { name: 'Google', href: 'https://google.fr' },
+    { name: 'Google', href: EXTERNAL_URL, isExternal: true },
   ];
 
   return (
@@ -36,8 +45,8 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled }) => {
                 <a
                   key={link.name}
                   href={link.href}
-                  target={link.name === 'Google' ? '_blank' : undefined}
-                  rel={link.name === 'Google' ? 'noopener noreferrer' : undefined}
+                  target={link.isExternal ? '_blank' : undefined}
+                  rel={link.isExternal ? 'noopener noreferrer' : undefined}
                   className="text-white hover:text-blue-400 px-3 py-2 text-sm font-medium transition-colors uppercase tracking-wider"
                 >
                   {link.name}
@@ -78,8 +87,8 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled }) => {
               <a
                 key={link.name}
                 href={link.href}
-                target={link.name === 'Google' ? '_blank' : undefined}
-                rel={link.name === 'Google' ? 'noopener noreferrer' : undefined}
+                target={link.isExternal ? '_blank' : undefined}
+                rel={link.isExternal ? 'noopener noreferrer' : undefined}
                 onClick={() => setIsOpen(false)}
                 className="text-slate-300 hover:text-white block px-3 py-4 text-base font-medium border-b border-slate-800"
               >
