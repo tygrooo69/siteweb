@@ -1,8 +1,5 @@
 {
   "name": "BatiQuest - Travaux Publics de Demain",
   "description": "Une vitrine digitale élégante pour une entreprise de travaux publics, intégrant un assistant IA pour répondre aux questions techniques et de gestion de projet.",
-  "requestFramePermissions": [
-    "camera",
-    "microphone"
-  ]
+  "requestFramePermissions": []
 }
