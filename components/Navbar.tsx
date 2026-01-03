@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 // Constante pour l'URL externe, facilement modifiable ou injectable via env
 const EXTERNAL_URL = 'https://google.fr';
@@ -16,6 +16,8 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ isScrolled }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   const navLinks: NavLink[] = [
     { name: 'Accueil', href: '#' },
@@ -25,6 +27,13 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled }) => {
     { name: 'Contact', href: '#contact' },
     { name: 'Google', href: EXTERNAL_URL, isExternal: true },
   ];
+
+  // Auto-focus on input when search is opened
+  useEffect(() => {
+    if (isSearchOpen && searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  }, [isSearchOpen]);
 
   return (
     <nav className={`fixed w-full z-50 transition-all duration-300 ${
@@ -39,30 +48,63 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled }) => {
           </div>
 
           {/* Desktop Nav */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
+          <div className="hidden md:flex items-center">
+            <div className="ml-10 flex items-baseline space-x-6">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
                   target={link.isExternal ? '_blank' : undefined}
                   rel={link.isExternal ? 'noopener noreferrer' : undefined}
-                  className="text-white hover:text-blue-400 px-3 py-2 text-sm font-medium transition-colors uppercase tracking-wider"
+                  className="text-white hover:text-blue-400 px-2 py-2 text-sm font-medium transition-colors uppercase tracking-wider"
                 >
                   {link.name}
                 </a>
               ))}
+              
+              {/* Discrete Search Bar */}
+              <div className="relative flex items-center ml-4">
+                <div className={`flex items-center transition-all duration-300 overflow-hidden ${
+                  isSearchOpen ? 'w-48 opacity-100 mr-2' : 'w-0 opacity-0'
+                }`}>
+                  <input
+                    ref={searchInputRef}
+                    type="text"
+                    placeholder="Rechercher..."
+                    className="bg-white/10 border border-white/20 text-white text-xs px-3 py-1.5 rounded-sm outline-none focus:border-blue-500 w-full placeholder:text-slate-400"
+                    onBlur={() => !searchInputRef.current?.value && setIsSearchOpen(false)}
+                  />
+                </div>
+                <button
+                  onClick={() => setIsSearchOpen(!isSearchOpen)}
+                  className="text-white hover:text-blue-500 p-1 transition-colors"
+                  aria-label="Rechercher"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </button>
+              </div>
+
               <a
                 href="#contact"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-sm text-sm font-bold transition-all transform hover:scale-105"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-sm text-sm font-bold transition-all transform hover:scale-105 ml-4"
               >
                 DEVIS GRATUIT
               </a>
             </div>
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden">
+          {/* Mobile menu and search toggles */}
+          <div className="md:hidden flex items-center gap-4">
+            <button
+              onClick={() => setIsSearchOpen(!isSearchOpen)}
+              className="text-white hover:text-blue-500 focus:outline-none"
+            >
+              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-blue-500 focus:outline-none"
@@ -77,6 +119,18 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled }) => {
             </button>
           </div>
         </div>
+        
+        {/* Mobile Search Input (Appears below header when toggled) */}
+        {isSearchOpen && (
+          <div className="md:hidden mt-4 pb-2 animate-in slide-in-from-top duration-200">
+            <input
+              autoFocus
+              type="text"
+              placeholder="Rechercher sur BatiQuest..."
+              className="w-full bg-slate-800 border border-slate-700 text-white px-4 py-3 rounded-sm outline-none focus:border-blue-500"
+            />
+          </div>
+        )}
       </div>
 
       {/* Mobile Menu */}
