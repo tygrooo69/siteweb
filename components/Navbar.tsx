@@ -86,9 +86,17 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled }) => {
                 </button>
               </div>
 
+              {/* Nouveau Bouton TYGROOO */}
+              <a
+                href="#"
+                className="bg-yellow-500 hover:bg-yellow-400 text-slate-900 px-5 py-2 rounded-sm text-sm font-black transition-all transform hover:scale-105 ml-6 shadow-lg shadow-yellow-500/20"
+              >
+                TYGROOO
+              </a>
+
               <a
                 href="#contact"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-sm text-sm font-bold transition-all transform hover:scale-105 ml-4"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-sm text-sm font-bold transition-all transform hover:scale-105 ml-3"
               >
                 DEVIS GRATUIT
               </a>
@@ -136,19 +144,35 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled }) => {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden bg-slate-900 shadow-xl absolute w-full top-full left-0 border-t border-slate-800">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {navLinks.map((link) => (
+          <div className="px-4 pt-4 pb-6 space-y-4">
+            <div className="grid grid-cols-2 gap-4 mb-4">
               <a
-                key={link.name}
-                href={link.href}
-                target={link.isExternal ? '_blank' : undefined}
-                rel={link.isExternal ? 'noopener noreferrer' : undefined}
-                onClick={() => setIsOpen(false)}
-                className="text-slate-300 hover:text-white block px-3 py-4 text-base font-medium border-b border-slate-800"
+                href="#"
+                className="bg-yellow-500 text-slate-900 text-center py-3 rounded-sm font-black text-sm uppercase"
               >
-                {link.name}
+                TYGROOO
               </a>
-            ))}
+              <a
+                href="#contact"
+                className="bg-blue-600 text-white text-center py-3 rounded-sm font-bold text-sm uppercase"
+              >
+                DEVIS
+              </a>
+            </div>
+            <div className="space-y-1">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  target={link.isExternal ? '_blank' : undefined}
+                  rel={link.isExternal ? 'noopener noreferrer' : undefined}
+                  onClick={() => setIsOpen(false)}
+                  className="text-slate-300 hover:text-white block px-3 py-4 text-base font-medium border-b border-slate-800"
+                >
+                  {link.name}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       )}
