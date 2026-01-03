@@ -1,21 +1,19 @@
-# Guide de déploiement BatiQuest
+# Guide d'installation BatiQuest sur Coolify (Node.js)
 
-Ce projet est optimisé pour un déploiement rapide sur **Coolify** ou tout environnement supportant **Docker**.
+Ce guide explique comment déployer l'application vitrine BatiQuest en utilisant Node.js pour servir les fichiers.
 
-## Configuration Coolify
+## Configuration dans Coolify
 
 1. **Source** : Connectez votre dépôt Git.
-2. **Build Pack** : Choisissez `Dockerfile`.
-3. **Variables d'Environnement** :
-   - Ajoutez `API_KEY` (votre clé Google Gemini).
-   - **Important** : Cochez la case pour en faire une "Build Variable" afin que Vite puisse l'inclure lors du `npm run build`.
-4. **Réseau** :
-   - Port de destination : `3000`.
+2. **Build Pack** : Sélectionnez `Dockerfile`. 
+3. **Fichier Docker** : Coolify détectera automatiquement le fichier nommé `Dockerfile` à la racine.
+4. **Port de destination** : Indiquez `3000` (le port par défaut configuré dans notre script).
 
-## Scripts de l'application
-- `npm run dev` : Développement local.
-- `npm run build` : Compilation de production.
-- `npm run preview` : Serveur de production (utilisé dans le Dockerfile).
+## Variables d'Environnement
+Dans l'onglet **Environment Variables**, ajoutez :
+- `API_KEY` : Votre clé API Gemini (disponible sur Google AI Studio).
 
-## Structure
-L'application utilise React 19, Tailwind CSS pour le style, et l'API Gemini pour l'assistance technique intelligente.
+**Note Importante** : Assurez-vous de marquer cette variable comme **"Build Variable"** (ou Build Argument) dans l'interface de Coolify, car elle est indispensable lors de l'étape de compilation `npm run build`.
+
+## Pourquoi cette approche ?
+En utilisant le serveur intégré de Vite (`npm run preview`), nous simplifions l'image Docker en supprimant la couche Nginx. C'est idéal pour une application vitrine car cela réduit le nombre de fichiers de configuration à maintenir tout en offrant d'excellentes performances.
