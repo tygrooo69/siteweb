@@ -14,6 +14,7 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled }) => {
     { name: 'Services', href: '#services' },
     { name: 'Projets', href: '#projects' },
     { name: 'Contact', href: '#contact' },
+    { name: 'Google', href: 'https://google.fr' },
   ];
 
   return (
@@ -35,6 +36,8 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled }) => {
                 <a
                   key={link.name}
                   href={link.href}
+                  target={link.name === 'Google' ? '_blank' : undefined}
+                  rel={link.name === 'Google' ? 'noopener noreferrer' : undefined}
                   className="text-white hover:text-blue-400 px-3 py-2 text-sm font-medium transition-colors uppercase tracking-wider"
                 >
                   {link.name}
@@ -75,6 +78,8 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled }) => {
               <a
                 key={link.name}
                 href={link.href}
+                target={link.name === 'Google' ? '_blank' : undefined}
+                rel={link.name === 'Google' ? 'noopener noreferrer' : undefined}
                 onClick={() => setIsOpen(false)}
                 className="text-slate-300 hover:text-white block px-3 py-4 text-base font-medium border-b border-slate-800"
               >
