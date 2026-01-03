@@ -11,6 +11,8 @@ import Footer from './components/Footer';
 import Sustainability from './components/Sustainability';
 import Testimonials from './components/Testimonials';
 import Careers from './components/Careers';
+import Process from './components/Process';
+import SafetyFirst from './components/SafetyFirst';
 
 const App: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -31,8 +33,10 @@ const App: React.FC = () => {
         <Hero />
         <About />
         <Services />
+        <Process />
         <Sustainability />
         <Projects />
+        <SafetyFirst />
         <Testimonials />
         <Careers />
         <Contact />
