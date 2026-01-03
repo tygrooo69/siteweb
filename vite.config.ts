@@ -8,6 +8,11 @@ export default defineConfig({
     'process.env.API_KEY': JSON.stringify(process.env.API_KEY)
   },
   server: {
-    port: 3000
+    port: 3000,
+    allowedHosts: ['site3.app.miniteam.fr']
+  },
+  preview: {
+    port: 3000,
+    allowedHosts: ['site3.app.miniteam.fr']
   }
 });
