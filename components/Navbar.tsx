@@ -86,17 +86,9 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled }) => {
                 </button>
               </div>
 
-              {/* Nouveau Bouton TYGROOO */}
-              <a
-                href="#"
-                className="bg-yellow-500 hover:bg-yellow-400 text-slate-900 px-5 py-2 rounded-sm text-sm font-black transition-all transform hover:scale-105 ml-6 shadow-lg shadow-yellow-500/20"
-              >
-                TYGROOO
-              </a>
-
               <a
                 href="#contact"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-sm text-sm font-bold transition-all transform hover:scale-105 ml-3"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-sm text-sm font-bold transition-all transform hover:scale-105 ml-6"
               >
                 DEVIS GRATUIT
               </a>
@@ -145,20 +137,12 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled }) => {
       {isOpen && (
         <div className="md:hidden bg-slate-900 shadow-xl absolute w-full top-full left-0 border-t border-slate-800">
           <div className="px-4 pt-4 pb-6 space-y-4">
-            <div className="grid grid-cols-2 gap-4 mb-4">
-              <a
-                href="#"
-                className="bg-yellow-500 text-slate-900 text-center py-3 rounded-sm font-black text-sm uppercase"
-              >
-                TYGROOO
-              </a>
-              <a
-                href="#contact"
-                className="bg-blue-600 text-white text-center py-3 rounded-sm font-bold text-sm uppercase"
-              >
-                DEVIS
-              </a>
-            </div>
+            <a
+              href="#contact"
+              className="block w-full bg-blue-600 text-white text-center py-3 rounded-sm font-bold text-sm uppercase"
+            >
+              DEVIS GRATUIT
+            </a>
             <div className="space-y-1">
               {navLinks.map((link) => (
                 <a
